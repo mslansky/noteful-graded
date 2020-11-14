@@ -1,11 +1,11 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {NavLink, Link} from 'react-router-dom'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
-import { countNotesForFolder } from '../notes-helpers'
+import {countNotesForFolder} from '../notes-helpers'
 import './NoteListNav.css'
 
-export default function NoteListNav(props) {
+export default function NoteListNav (props) {
   return (
     <div className='NoteListNav'>
       <ul className='NoteListNav__list'>

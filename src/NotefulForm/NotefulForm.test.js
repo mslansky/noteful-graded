@@ -1,9 +1,9 @@
-import React from 'react';
-import { shallow } from 'enzyme'
+import React from 'react'
+import {shallow} from 'enzyme'
 import toJson from 'enzyme-to-json'
 import NotefulForm from './NotefulForm'
 
-describe(`NotefulForm component`, () => {
+describe('NotefulForm component', () => {
   const props = {
     className: 'test-class-name',
     children: <p>test children</p>,

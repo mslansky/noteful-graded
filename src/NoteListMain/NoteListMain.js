@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Link} from 'react-router-dom'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
 import './NoteListMain.css'
 
-export default function NoteListMain(props) {
+export default function NoteListMain (props) {
   return (
     <section className='NoteListMain'>
       <ul>
@@ -36,5 +36,5 @@ export default function NoteListMain(props) {
 }
 
 NoteListMain.defaultProps = {
-  notes: [],
+  notes: []
 }

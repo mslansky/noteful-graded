@@ -1,9 +1,9 @@
-import React from 'react';
-import { shallow } from 'enzyme'
+import React from 'react'
+import {shallow} from 'enzyme'
 import toJson from 'enzyme-to-json'
 import CircleButton from './CircleButton'
 
-describe(`CircleButton component`, () => {
+describe('CircleButton component', () => {
   const props = {
     tag: 'a',
     className: 'test-class-name',
