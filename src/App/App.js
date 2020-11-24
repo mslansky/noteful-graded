@@ -5,9 +5,11 @@ import NoteListNav from '../NoteListNav/NoteListNav'
 import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListMain from '../NoteListMain/NoteListMain'
 import NotePageMain from '../NotePageMain/NotePageMain'
-import dummyStore from '../dummy-store'
 import {getNotesForFolder, findNote, findFolder} from '../notes-helpers'
 import './App.css'
+import AddFolder from '../AddFolder/AddFolder'
+import AddNote from '../AddNote/AddNote'
+import ErrorBoundary from '../ErrorBoundary'
 
 class App extends Component {
   state = {
@@ -16,14 +18,21 @@ class App extends Component {
   };
 
   componentDidMount () {
-    // fake date loading from API call
-    setTimeout(() => this.setState(dummyStore), 600)
+    const url = 'http://localhost:9090/folders'
+    fetch(url)
+      .then(response => response.json())
+      .then(apiFolders => this.setState({folders: apiFolders}))
+
+    const api = 'http://localhost:9090/notes'
+    fetch(api)
+      .then(response => response.json())
+      .then(apiNotes => this.setState({notes: apiNotes}))
   }
 
   renderNavRoutes () {
     const {notes, folders} = this.state
     return (
-      <>
+      <ErrorBoundary>
         {['/', '/folder/:folderId'].map(path => (
           <Route
             exact
@@ -47,16 +56,14 @@ class App extends Component {
             return <NotePageNav {...routeProps} folder={folder} />
           }}
         />
-        <Route path="/add-folder" component={NotePageNav} />
-        <Route path="/add-note" component={NotePageNav} />
-      </>
+      </ErrorBoundary>
     )
   }
 
   renderMainRoutes () {
-    const {notes} = this.state
+    const {folders, notes} = this.state
     return (
-      <>
+      <ErrorBoundary>
         {['/', '/folder/:folderId'].map(path => (
           <Route
             exact
@@ -85,7 +92,11 @@ class App extends Component {
             return <NotePageMain {...routeProps} note={note} />
           }}
         />
-      </>
+        <Route path="/add-folder" component={AddFolder} />
+        <Route path="/add-note" render={routeProps => {
+          return <AddNote folders={folders} />
+        }}/>
+      </ErrorBoundary>
     )
   }
 

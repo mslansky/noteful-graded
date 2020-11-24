@@ -1,0 +1,16 @@
+
+form {
+display: flex;
+}
+
+label{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.submit-button{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

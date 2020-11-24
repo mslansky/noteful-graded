@@ -33,6 +33,6 @@ NotePageNav.defaultProps = {
 }
 
 NotePageNav.propTypes = {
-  history: PropTypes.object,
-  folder: PropTypes.object
+  history: PropTypes.object.isRequired,
+  folder: PropTypes.object.isRequired
 }

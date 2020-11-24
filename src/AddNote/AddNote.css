@@ -1,0 +1,20 @@
+.AddNote{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  
+}
+
+div.NoteInput{
+  display: display-inline;
+  
+}
+
+div.NoteContent{
+  width: auto;
+	height: 600px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+}

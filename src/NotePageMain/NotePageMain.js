@@ -27,5 +27,5 @@ NotePageMain.defaultProps = {
 }
 
 NotePageMain.propTypes = {
-  note: PropTypes.object
+  note: PropTypes.object.isRequired
 }

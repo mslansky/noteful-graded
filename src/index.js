@@ -8,11 +8,12 @@ import {BrowserRouter} from 'react-router-dom'
 import 'typeface-roboto'
 import './index.css'
 import App from './App/App'
+import history from './history'
 
 library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter history={history}>
     <App />
   </BrowserRouter>,
   document.getElementById('root')
