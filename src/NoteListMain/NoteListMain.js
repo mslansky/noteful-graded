@@ -1,10 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
 import './NoteListMain.css'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 export default class NoteListMain extends React.Component {
   render () {
@@ -17,6 +17,7 @@ export default class NoteListMain extends React.Component {
                 id={note.id}
                 name={note.name}
                 modified={note.modified}
+                refresh={this.props.refresh}
               />
             </li>
           )}
@@ -43,5 +44,6 @@ NoteListMain.defaultProps = {
 }
 
 NoteListMain.propTypes = {
-  notes: PropTypes.array.isRequired
+  notes: PropTypes.array.isRequired,
+  refresh: PropTypes.func.isRequired
 }

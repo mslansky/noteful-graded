@@ -2,6 +2,7 @@ import React from 'react'
 import Note from '../Note/Note'
 import './NotePageMain.css'
 import PropTypes from 'prop-types'
+import history from '../history'
 
 export default function NotePageMain (props) {
   return (
@@ -10,6 +11,7 @@ export default function NotePageMain (props) {
         id={props.note.id}
         name={props.note.name}
         modified={props.note.modified}
+        refresh={() => { props.refresh(); history.goBack() }}
       />
       <div className='NotePageMain__content'>
         {props.note.content.split(/\n \r|\n/).map((para, i) =>
@@ -27,5 +29,6 @@ NotePageMain.defaultProps = {
 }
 
 NotePageMain.propTypes = {
-  note: PropTypes.object.isRequired
+  note: PropTypes.object.isRequired,
+  refresh: PropTypes.func.isRequired
 }

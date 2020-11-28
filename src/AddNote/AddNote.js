@@ -25,11 +25,14 @@ export default class AddNote extends React.Component {
         body: JSON.stringify(postJson)
       })
         .then(response => response.json())
-        .then(json => { history.goBack() })
+        .then(json => { this.props.refresh(); history.goBack() })
+        .catch(err => { console.log(err) })
     }
 
+    // history.goBack()
+
     return (
-      <container className = "AddNote">
+      <div className = "AddNote">
         <form onSubmit={handleSubmit}>
           <div className="NoteInput">
             <label htmlFor="new-note-button"> Add New Note
@@ -51,11 +54,12 @@ export default class AddNote extends React.Component {
             <input className="submit-button" type="submit" value="Submit" disabled={!(this.state.name.length > 0 && this.state.content.length > 3)}/>
           </div>
         </form>
-      </container>
+      </div>
     )
   }
 }
 
 AddNote.propTypes = {
-  folders: PropTypes.array.isRequired
+  folders: PropTypes.array.isRequired,
+  refresh: PropTypes.func.isRequired
 }

@@ -5,6 +5,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './Note.css'
 import PropTypes from 'prop-types'
 
+function deleteNote (props) {
+  fetch(`http://localhost:9090/notes/${props.id}`, {method: 'DELETE'})
+    .then(props.refresh)
+    .catch(err => { console.log(err) })
+}
+// delete a note from the api when user clicks the trash icon
+
 export default function Note (props) {
   return (
     <div className='Note'>
@@ -13,7 +20,7 @@ export default function Note (props) {
           {props.name}
         </Link>
       </h2>
-      <button className='Note__delete' type='button'>
+      <button className='Note__delete' type='button' onClick={() => { deleteNote(props) }}>
         <FontAwesomeIcon icon='trash-alt' />
         {' '}
         remove
@@ -33,6 +40,6 @@ export default function Note (props) {
 
 Note.propTypes = {
   name: PropTypes.string.isRequired,
-  modified: PropTypes.string,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  modified: PropTypes.string
 }

@@ -12,12 +12,17 @@ import AddNote from '../AddNote/AddNote'
 import ErrorBoundary from '../ErrorBoundary'
 
 class App extends Component {
-  state = {
-    notes: [],
-    folders: []
-  };
+  constructor (props) {
+    super(props)
 
-  componentDidMount () {
+    this.state = {
+      notes: [],
+      folders: []
+    }
+    this.refresh = this.refresh.bind(this)
+  }
+
+  refresh () {
     const url = 'http://localhost:9090/folders'
     fetch(url)
       .then(response => response.json())
@@ -27,6 +32,11 @@ class App extends Component {
     fetch(api)
       .then(response => response.json())
       .then(apiNotes => this.setState({notes: apiNotes}))
+      .catch(err => { console.log(err) })
+  }
+
+  componentDidMount () {
+    this.refresh()
   }
 
   renderNavRoutes () {
@@ -79,6 +89,7 @@ class App extends Component {
                 <NoteListMain
                   {...routeProps}
                   notes={notesForFolder}
+                  refresh={this.refresh}
                 />
               )
             }}
@@ -89,12 +100,12 @@ class App extends Component {
           render={routeProps => {
             const {noteId} = routeProps.match.params
             const note = findNote(notes, noteId)
-            return <NotePageMain {...routeProps} note={note} />
+            return <NotePageMain {...routeProps} note={note} refresh={this.refresh}/>
           }}
         />
-        <Route path="/add-folder" component={AddFolder} />
+        <Route path="/add-folder" render={routeProps => { return <AddFolder component={AddFolder} refresh={this.refresh} /> }}/>
         <Route path="/add-note" render={routeProps => {
-          return <AddNote folders={folders} />
+          return <AddNote folders={folders} refresh={this.refresh}/>
         }}/>
       </ErrorBoundary>
     )
